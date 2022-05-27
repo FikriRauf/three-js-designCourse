@@ -35,16 +35,11 @@
         var material = new THREE.MeshLambertMaterial({color: 0xFFCC00})
         var mesh = new THREE.Mesh(geometry, material);
 
-        // individual positioning
-        mesh.position.x = -2;
-        mesh.position.y = 2;
-        mesh.position.z = 2;
-
         // all in one positioning : (x,y,z)
-        // mesh.position.set(2,2,-2);
-        
-        // mesh.rotation.set(45,0,0);
-        // mesh.scale.set(1,2,1);
+        mesh.position.set(2,2,-2);
+
+        mesh.rotation.set(45,0,0);
+        mesh.scale.set(1,2,1);
 
 
         scene.add(mesh);
@@ -55,6 +50,10 @@
 
         var render = function() {
             requestAnimationFrame(render);            
+            
+            mesh.rotation.x += 0.02;
+            mesh.rotation.y += 0.01;
+
             renderer.render(scene, camera);
         }
 
