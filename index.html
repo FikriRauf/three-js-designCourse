@@ -10,6 +10,7 @@
 <body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/102/three.js"></script>
     <scrpit src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TweenMax.min.js"></scrpit>
+    <!-- <scrpit src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></scrpit> -->
 
     <script>
         var scene = new THREE.Scene();
@@ -30,9 +31,21 @@
             camera.updateProjectionMatrix();
         })
 
-        var geometry = new THREE.SphereGeometry(1, 10, 40);
+        var geometry = new THREE.BoxGeometry(1, 1, 1);
         var material = new THREE.MeshLambertMaterial({color: 0xFFCC00})
         var mesh = new THREE.Mesh(geometry, material);
+
+        // individual positioning
+        mesh.position.x = -2;
+        mesh.position.y = 2;
+        mesh.position.z = 2;
+
+        // all in one positioning : (x,y,z)
+        // mesh.position.set(2,2,-2);
+        
+        // mesh.rotation.set(45,0,0);
+        // mesh.scale.set(1,2,1);
+
 
         scene.add(mesh);
 
@@ -40,8 +53,12 @@
         light.position.set(10,0,25);
         scene.add(light);
 
-        renderer.render(scene, camera);
-                
+        var render = function() {
+            requestAnimationFrame(render);            
+            renderer.render(scene, camera);
+        }
+
+        render();        
     </script>
     
 </body>
