@@ -9,8 +9,7 @@
 </head>
 <body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/102/three.js"></script>
-    <scrpit src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TweenMax.min.js"></scrpit>
-    <!-- <scrpit src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></scrpit> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TweenMax.min.js"></script>
 
     <script>
         var scene = new THREE.Scene();
@@ -35,13 +34,6 @@
         var material = new THREE.MeshLambertMaterial({color: 0xFFCC00})
         var mesh = new THREE.Mesh(geometry, material);
 
-        // all in one positioning : (x,y,z)
-        mesh.position.set(2,2,-2);
-
-        mesh.rotation.set(45,0,0);
-        mesh.scale.set(1,2,1);
-
-
         scene.add(mesh);
 
         var light = new THREE.PointLight(0xFFFFFF, 1, 500)
@@ -49,15 +41,19 @@
         scene.add(light);
 
         var render = function() {
-            requestAnimationFrame(render);            
-            
-            mesh.rotation.x += 0.02;
-            mesh.rotation.y += 0.01;
-
+            requestAnimationFrame(render);
             renderer.render(scene, camera);
         }
 
         render();        
+
+        this.tl = new TimelineMax({paused: true});
+        this.tl.to(this.mesh.scale, 1, {x: 2, ease: Expo.easeOut})
+        this.tl.to(this.mesh.scale, .5, {x: .5, ease: Expo.easeOut})
+        this.tl.to(this.mesh.position, .5, {x: 2, ease: Expo.easeOut})
+        this.tl.to(this.mesh.rotation, .5, {y: Math.PI*.5, ease: Expo.easeOut}, "=-1.5")
+        
+        
     </script>
     
 </body>
